@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+    
+
+        <script type="text/javascript">
+            var localHandler = function(data) {
+                alert('我是本地函数，可以被跨域的remote.js文件调用，远程js带来的数据是：' + data.result);
+            }
+        </script>
+
+        <script src="http://127.0.0.1:8080/web-ajax/resources/js/remote.js" type="text/javascript"></script>
+
+    </body>
+</html>

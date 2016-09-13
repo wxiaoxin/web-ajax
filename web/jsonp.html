@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>jsonp实现跨域请求</title>
+</head>
+
+<body>
+
+<form>
+    <label for="id">id:</label><input type="text" id="id" name="id" placeholder="请输入id">
+</form>
+<button id="btn_submit">提交</button>
+
+<script src="./jquery-1.12.3.min.js"></script>
+
+<script type="text/javascript">
+
+    // jsonp回调函数
+    function jsonpCallback(data) {
+        console.log("回调结果：" + data);
+    }
+
+    // 按钮点击，执行一个ajax请求
+    $("#btn_submit").click(function () {
+        /**
+         * jsonp
+         */
+        var url = "http://127.0.0.1:8080/web-ajax/info2.htm";
+        $.ajax({
+            url: url,
+            type: "post",
+            data: {
+                id: $("#id").val()
+            },
+            // 响应数据类型
+            dataType: "jsonp",
+            // 服务器端将通过callback字段获取本地回调函数的名称
+            jsonp: "callback",
+            // 声明本地回调函数的名称
+            jsonpCallback: "jsonpCallback",
+            success: function (data) {
+                console.log("ajax响应结果: " + data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + " " + errorThrown);
+            }
+        })
+
+    });
+
+
+</script>
+
+</body>
+</html>

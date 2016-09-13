@@ -1,0 +1,48 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ajax跨域请求</title>
+</head>
+<body>
+
+<form>
+    <label for="id">id:</label><input type="text" id="id" name="id" placeholder="请输入id">
+</form>
+<button id="btn_submit">提交</button>
+
+<script src="./jquery-1.12.3.min.js"></script>
+
+<script type="text/javascript">
+
+    $("#btn_submit").click(function() {
+
+        /**
+         * 不能进行跨域请求数据。ajax的请求可以发送，服务器也能接收到请求，但是浏览器会将跨域请求结果拦截
+         */
+        var url1 = "http://127.0.0.1:8080/web-ajax/info.htm";
+        /**
+         * 由于在服务器端，Http响应的头部设置了Access-Control-Origin:"*"的头部，因此可以通过ajax实现跨域请求
+         */
+        var url = "http://127.0.0.1:8080/web-ajax/info3.htm";
+
+        $.ajax({
+            url: url,
+            type: "post",
+            data: {
+                id: $("#id").val();   
+            },
+            dataType: "json",
+            success: function (resp) {
+                console.log(resp);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + errorThrown);
+            }
+        })
+
+    });
+
+</script>
+
+</body>
+</html>
